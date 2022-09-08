@@ -6,7 +6,7 @@ import Header from "../components/Header";
 const Home: NextPage = () => {
   const background = 'backround-color:#2D242F'
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+    <div className="">
       <Head>
         <title>Crypto Exchange Uniswap clone</title>
         <link rel="icon" href="/favicon.ico" />
