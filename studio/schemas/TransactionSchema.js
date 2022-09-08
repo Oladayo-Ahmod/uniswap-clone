@@ -1,6 +1,7 @@
 export const TransactionSchema = {
     name : 'transactions',
     title : 'Transactions',
+    type : 'document',
     fields : [
        {
         name : 'txHash',
