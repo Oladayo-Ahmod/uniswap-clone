@@ -12,6 +12,8 @@ import person from './person'
 import screening from './screening'
 import plotSummary from './plotSummary'
 import plotSummaries from './plotSummaries'
+import { TransactionSchema } from './TransactionSchema'
+import { UserSchema } from './UserSchema'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -22,6 +24,8 @@ export default createSchema({
   types: schemaTypes.concat([
     // The following are document types which will appear
     // in the studio.
+    TransactionSchema,
+    UserSchema,
     movie,
     person,
     screening,
