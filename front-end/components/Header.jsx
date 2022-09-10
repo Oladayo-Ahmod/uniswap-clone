@@ -1,22 +1,67 @@
 import React, { useState, useEffect } from 'react';
 
 const Header =()=> {
-
     useEffect(()=>{
         require("bootstrap/dist/js/bootstrap.bundle.min.js");
     })
 
     return (
-        <div className='container'>
-            <div className='row'>
-                <div className='col-md-4'>
-                    <img src='/images/uniswap.webp' className='header-image'  alt="nothing" srcSet="" />
-                </div>
-                <div className='col-md-4'>
-                    
-                </div>
-                <div className='col-md-4'>
-                    
+        <div>
+            <style jsx>
+                {
+                    `
+                    .rounded-bg{
+                        background-color:#191B1F;
+                        height : 50px;
+                    }
+                    .rounded-bg >.row>.div{
+                        position:relative;
+                        left:5px
+                    }
+                    .rounded-child{
+                        background-color:#20242A;
+                        width:fit-content;
+                        width:auto;
+                    }
+                    `
+                }
+            </style>
+            <div className='container-fluid'>
+                <div className='row'>
+                    <div className='col-md-4 mt-2 '>
+                        <img src='/images/uniswap.webp' className='header-image'  alt="nothing" srcSet="" />
+                    </div>
+                    <div className='col-md-3 mt-2 p-2'>
+                        <div className='rounded-pill rounded-bg'>
+                            <div className="row justify-content-center align-items-center">
+                                <div className="col-md-3">
+                                    <div className="rounded-child rounded-pill text-center rounded-child text-white py-2 mt-1">
+                                        <span>Swap</span>
+                                    </div>
+                                </div>
+                                <div className="col-md-3">
+
+                                    <div className="rounded-child rounded-pill text-center rounded-child text-white py-2 mt-1">
+                                        <span>Pool</span>
+                                    </div>
+                                    </div>
+                                <div className="col-md-3">
+                                    <div className="rounded-child rounded-pill text-center rounded-child text-white py-2 mt-1">
+                                        <span>Vote</span>
+                                    </div>
+                                    </div>
+                                <div className="col-md-3">
+                                    <div className="rounded-child rounded-pill text-center rounded-child text-white py-2 mt-1">
+                                        <span>Charts</span>
+                                    </div>
+                                    </div>
+                        
+                            </div>
+                        </div>
+                    </div>
+                    <div className='col-md-5'>
+                        
+                    </div>
                 </div>
             </div>
         </div>
