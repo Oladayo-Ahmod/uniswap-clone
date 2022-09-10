@@ -14,15 +14,19 @@ const Header =()=> {
                         background-color:#191B1F;
                         height : 50px;
                     }
-                    .rounded-bg >.row>.div{
-                        position:relative;
-                        left:5px
+                    .rounded-bg >.row>div{
+                        margin-left: -10px;
+                        /* right: 10px !important; */
+                        position: relative;
+                        left:0px;
                     }
                     .rounded-child{
+                        cursor:pointer;
                         background-color:#20242A;
                         width:fit-content;
                         width:auto;
                     }
+                    
                     `
                 }
             </style>
@@ -31,7 +35,7 @@ const Header =()=> {
                     <div className='col-md-4 mt-2 '>
                         <img src='/images/uniswap.webp' className='header-image'  alt="nothing" srcSet="" />
                     </div>
-                    <div className='col-md-3 mt-2 p-2'>
+                    <div className='col-md-3 mt-2 p-1'>
                         <div className='rounded-pill rounded-bg'>
                             <div className="row justify-content-center align-items-center">
                                 <div className="col-md-3">
