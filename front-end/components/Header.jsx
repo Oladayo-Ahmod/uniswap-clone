@@ -26,6 +26,10 @@ const Header =()=> {
                         width:fit-content;
                         width:auto;
                     }
+                    .wallet-address{
+                        background-color:#191B1F;
+                        height: 45px;
+                    }
                     
                     `
                 }
@@ -63,8 +67,15 @@ const Header =()=> {
                             </div>
                         </div>
                     </div>
-                    <div className='col-md-5'>
-                        
+                    <div className='col-md-5 mt-2 p-2'>
+                        <div className="row">
+                            <div className="col-md-5 px-5 ">
+                                <div className='wallet-address rounded-pill'>
+
+                                </div>
+                            </div>
+                            <div className="col-md-7"></div>
+                        </div>
                     </div>
                 </div>
             </div>
