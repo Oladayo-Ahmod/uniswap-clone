@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 const Header =()=> {
     useEffect(()=>{
         require("bootstrap/dist/js/bootstrap.bundle.min.js");
@@ -29,6 +28,7 @@ const Header =()=> {
                     .wallet-address{
                         background-color:#191B1F;
                         height: 45px;
+                        padding :10px 23px;
                     }
                     
                     `
@@ -71,10 +71,14 @@ const Header =()=> {
                         <div className="row">
                             <div className="col-md-5 px-5 ">
                                 <div className='wallet-address rounded-pill'>
-
+                                    <p className='text-white font-lighter'>xcuw3...f20f</p>
                                 </div>
                             </div>
-                            <div className="col-md-7"></div>
+                            <div className="col-md-7">
+                                <div>
+                                   <button className='btn btn-primary rounded-pill'>Connect Wallet</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
