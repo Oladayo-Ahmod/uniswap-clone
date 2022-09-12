@@ -6,3 +6,6 @@ body {
     width: 80px;
     object-fit: cover;
 }
+.rounded-bg{
+    background-color:#191B1F;
+}
