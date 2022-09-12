@@ -28,7 +28,7 @@ const Header =()=> {
                     .wallet-address{
                         background-color:#191B1F;
                         height: 45px;
-                        padding :10px 23px;
+                        padding :10px 30px;
                     }
                     
                     `
@@ -62,7 +62,7 @@ const Header =()=> {
                                     <div className="rounded-child rounded-pill text-center rounded-child text-white py-2 mt-1">
                                         <span>Charts</span>
                                     </div>
-                                    </div>
+                                </div>
                         
                             </div>
                         </div>
