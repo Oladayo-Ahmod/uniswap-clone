@@ -6,6 +6,10 @@ let eth
 if (typeof(window) !== 'undefined') {
     eth = window.ethereum
 }
+ /**
+  * transaction provider
+  * @param  {} {children}
+  */
  const TransactionProvider = ({children})=>{
     const [currentAccount,setCurrentAccount] = useState()
     const connectWallet = async function (metamask = eth){
@@ -13,12 +17,31 @@ if (typeof(window) !== 'undefined') {
         if (!metamask) return alert('please, install metamask')
             const accounts = await metamask.request({method : 'eth_requestAccounts'})
             setCurrentAccount(accounts[0])
-            console.log(accounts) 
        } catch (error) {
             console.log(error)
        }
     }
-    
+
+    /**
+     * @param  {} (
+     */
+    useEffect(()=>{
+        WalletConnected()
+    },[])
+
+    /**
+     * check if wallet is connected
+     * @param  {} metamask=eth
+     */
+    const WalletConnected = async (metamask = eth)=>{
+        try {
+            if (!metamask) return alert('Please, install metamask')
+            const accounts = await metamask.request({method : 'eth_accounts'})
+            accounts.length ?  console.log('wallet already connected') : connectWallet()
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <TransactionContext.Provider 
