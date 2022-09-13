@@ -13,7 +13,7 @@ const Main =()=>{
                 {
             `.rounded-bg{
                 background-color:#191B1F;
-                height:300px;
+                height:auto;
             }
             input{
                 background :#20242A;
@@ -23,6 +23,9 @@ const Main =()=>{
             .input-group span{
                 background-color :#2D242F;
                 border-color :#2D242F;
+            }
+            button{
+                width : inherit;
             }
             `
             }
@@ -44,14 +47,25 @@ const Main =()=>{
                             </ul>
                             </div>
                        </div>
-                       <div className="col-md-12 pt-2 d-flex justify-content-between">
+                       <div className="col-md-12 pt-2 d-flex justify-content-between my-3">
                            <div className="input-group">
                             <span className='input-group-text text-white'>0.0</span>
                              <input type="text"
                                className="form-control" name="" id="" aria-describedby="helpId" placeholder="" />
                            </div>
                        </div>
-                    </div>  
+                       <div className="col-md-12 pt-2 d-flex justify-content-between my-3">
+                           <div className="input-group">
+                            <span className='input-group-text text-white'>0x..</span>
+                             <input type="text"
+                               className="form-control" name="" id="" aria-describedby="helpId" placeholder="" />
+                           </div>
+                       </div>
+                        <div className="col-md-12 px-1 mb-3">
+                            <button className='btn btn-primary'>Confirm</button>    
+                        </div>  
+                    </div>
+                   
                 </div>
             </div>
         </div>
