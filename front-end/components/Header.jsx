@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import {TransactionContext} from '../context/TransactionContext'
 const Header =()=> {
     const {connectWallet,currentAccount} = useContext(TransactionContext)
-
+    console.log(currentAccount);
     // console.log({connectWallet,currentAccount})
     useEffect(()=>{
         require("bootstrap/dist/js/bootstrap.bundle.min.js");
@@ -34,7 +34,10 @@ const Header =()=> {
                         height: 45px;
                         padding :10px 30px;
                     }
-                    
+                    .wallet-address p{
+                        font-size : small;
+                        font-weight :500;
+                    }
                     `
                 }
             </style>
@@ -74,13 +77,25 @@ const Header =()=> {
                     <div className='col-md-5 mt-2 p-2'>
                         <div className="row">
                             <div className="col-md-5 px-5 ">
-                                <div className='wallet-address rounded-pill'>
-                                    <p className='text-white font-lighter'>xcuw3...f20f</p>
+                                    {currentAccount && (
+                                <div className='wallet-address rounded-pill'> 
+
+                                        <p className='text-white font-lighter'>
+                                            {currentAccount.slice(0,6)}...{currentAccount.slice(currentAccount.length -4)}
+                                        </p>
                                 </div>
+
+                                    ) }
+                                    
                             </div>
                             <div className="col-md-7">
                                 <div>
-                                   <button className='btn btn-primary rounded-pill' onClick={() =>connectWallet()}>Connect Wallet</button>
+                                    {connectWallet ? (
+                                         <button className='btn btn-primary rounded-pill' disabled>Connected</button>
+                                    ) : (
+                                        <button className='btn btn-primary rounded-pill' onClick={() =>connectWallet()}>Connect Wallet</button>
+                                    )}
+                                  
                                 </div>
                             </div>
                         </div>

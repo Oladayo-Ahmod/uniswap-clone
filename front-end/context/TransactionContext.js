@@ -17,6 +17,7 @@ if (typeof(window) !== 'undefined') {
         if (!metamask) return alert('please, install metamask')
             const accounts = await metamask.request({method : 'eth_requestAccounts'})
             setCurrentAccount(accounts[0])
+            console.log(accounts)
        } catch (error) {
             console.log(error)
        }
@@ -37,7 +38,8 @@ if (typeof(window) !== 'undefined') {
         try {
             if (!metamask) return alert('Please, install metamask')
             const accounts = await metamask.request({method : 'eth_accounts'})
-            accounts.length ?  console.log('wallet already connected') : connectWallet()
+            accounts.length ?    setCurrentAccount(accounts[0])
+            : connectWallet()
         } catch (error) {
             console.log(error)
         }
