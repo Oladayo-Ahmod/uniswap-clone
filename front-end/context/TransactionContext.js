@@ -39,7 +39,7 @@ if (typeof(window) !== 'undefined') {
             if (!metamask) return alert('Please, install metamask')
             const accounts = await metamask.request({method : 'eth_accounts'})
             accounts.length ?    setCurrentAccount(accounts[0])
-            : connectWallet()
+            : console.log('not connected')
         } catch (error) {
             console.log(error)
         }

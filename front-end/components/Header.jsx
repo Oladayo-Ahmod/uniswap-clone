@@ -90,7 +90,7 @@ const Header =()=> {
                             </div>
                             <div className="col-md-7">
                                 <div>
-                                    {connectWallet ? (
+                                    {currentAccount ? (
                                          <button className='btn btn-primary rounded-pill' disabled>Connected</button>
                                     ) : (
                                         <button className='btn btn-primary rounded-pill' onClick={() =>connectWallet()}>Connect Wallet</button>
