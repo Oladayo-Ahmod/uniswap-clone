@@ -1,5 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import {TransactionContext} from '../context/TransactionContext'
 const Header =()=> {
+    const {connectWallet,currentAccount} = useContext(TransactionContext)
+
+    // console.log({connectWallet,currentAccount})
     useEffect(()=>{
         require("bootstrap/dist/js/bootstrap.bundle.min.js");
     })
@@ -76,7 +80,7 @@ const Header =()=> {
                             </div>
                             <div className="col-md-7">
                                 <div>
-                                   <button className='btn btn-primary rounded-pill'>Connect Wallet</button>
+                                   <button className='btn btn-primary rounded-pill' onClick={() =>connectWallet()}>Connect Wallet</button>
                                 </div>
                             </div>
                         </div>

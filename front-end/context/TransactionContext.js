@@ -3,29 +3,26 @@ import React, { useState, useEffect } from 'react';
 const TransactionContext = React.createContext()
 
 let eth
-if (window.ethereum !== 'undefined') {
+if (typeof(window) !== 'undefined') {
     eth = window.ethereum
 }
-
-const TransactionProvider = ({children})=>{
+ const TransactionProvider = ({children})=>{
     const [currentAccount,setCurrentAccount] = useState()
-    const connectWallet = async (metamask = eth)=>{
-        if (!metamask) {
-            console.log('please, install metamask') 
-        }
-        else{
+    const connectWallet = async function (metamask = eth){
+       try {
+        if (!metamask) return alert('please, install metamask')
             const accounts = await metamask.request({method : 'eth_requestAccounts'})
             setCurrentAccount(accounts[0])
-        }
+            console.log(accounts) 
+       } catch (error) {
+            console.log(error)
+       }
     }
     
 
     return (
         <TransactionContext.Provider 
-        value={
-            {currentAccount,
-            connectWallet}
-        }
+       value={{currentAccount,connectWallet}}
         >
             {children}
         </TransactionContext.Provider>
@@ -34,6 +31,7 @@ const TransactionProvider = ({children})=>{
 }
 
 module.exports = {
-    TransactionContext,
-    TransactionProvider
+    TransactionProvider,
+    TransactionContext
+
 }
