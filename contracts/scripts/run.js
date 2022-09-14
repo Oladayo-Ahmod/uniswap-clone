@@ -2,7 +2,7 @@ const {network, ethers, deployments} = require('hardhat')
 
 async function main(){
   const {log} = deployments
-  const contract = await hre.ethers.getContractFactory('Transactions')
+  const contract = await hre.ethers.getContractFactory('Transaction')
   const deployment = await contract.deploy()
   log('set to deploy transaction')
   await deployment.deployed()
