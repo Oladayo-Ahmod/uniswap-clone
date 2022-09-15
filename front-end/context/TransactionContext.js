@@ -98,9 +98,13 @@ if (typeof(window) !== 'undefined') {
             // )
             
             // setIsLoading(false)
+
         } catch (error) {
             console.log(error);
         }       
+    }
+    const handleChange = (e, name)=>{
+        setFormdata((prevState)=> ({... prevState,[name] : e.target.value}))
     }
  
     return (
@@ -108,7 +112,8 @@ if (typeof(window) !== 'undefined') {
         value={{
         currentAccount,
         connectWallet,
-        SendTransaction
+        SendTransaction,
+        handleChange
         }}
         >
             {children}
