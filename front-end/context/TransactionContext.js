@@ -13,7 +13,11 @@ if (typeof(window) !== 'undefined') {
   */
  const TransactionProvider = ({children})=>{
     const [currentAccount,setCurrentAccount] = useState()
-    const [Isloading,setIsloading] = useState(false)
+    const [isLoading,setIsLoading] = useState(false)
+    const [formdata,setFormdata] = useState({
+        receiver : '',
+        amount : ''
+    })
     const connectWallet = async function (metamask = eth){
        try {
         if (!metamask) return alert('please, install metamask')
@@ -77,7 +81,7 @@ if (typeof(window) !== 'undefined') {
               receiver,amount,`Transfer ${amount} to ${receiver}`,'TRANSFER'  
             )
             
-            setIsloading(true)
+            setIsLoading(true)
             await transactionHash.wait()
 
             /**
@@ -86,14 +90,14 @@ if (typeof(window) !== 'undefined') {
              * @param  {} connectedAccount
              * @param  {} receiver
              */
-            await saveTransaction(
-                transactionHash.hash,
-                amount,
-                connectedAccount,
-                receiver
-            )
+            // await saveTransaction(
+            //     transactionHash.hash,
+            //     amount,
+            //     connectedAccount,
+            //     receiver
+            // )
             
-            setIsloading(false)
+            // setIsLoading(false)
         } catch (error) {
             console.log(error);
         }       
@@ -101,7 +105,11 @@ if (typeof(window) !== 'undefined') {
  
     return (
         <TransactionContext.Provider 
-       value={{currentAccount,connectWallet}}
+        value={{
+        currentAccount,
+        connectWallet,
+        SendTransaction
+        }}
         >
             {children}
         </TransactionContext.Provider>
