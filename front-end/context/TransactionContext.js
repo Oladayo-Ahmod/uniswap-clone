@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+// const {ethers} = require('hardhat')
 const TransactionContext = React.createContext()
 
 let eth
@@ -38,13 +38,37 @@ if (typeof(window) !== 'undefined') {
         try {
             if (!metamask) return alert('Please, install metamask')
             const accounts = await metamask.request({method : 'eth_accounts'})
-            accounts.length ?    setCurrentAccount(accounts[0])
+            accounts.length ?   setCurrentAccount(accounts[0])
             : console.log('not connected')
         } catch (error) {
             console.log(error)
         }
     }
+    /**
+     * @param  {} metamask=eth
+     * @param  {} connectedAccount=currentAccount
+     */
+    const SendTransaction = async (metamask = eth, connectedAccount = currentAccount)=>{
+        try {
+            if(!metamask) return alert('Please, install metamask')
+            const {receiver, amount} = formdata
+            const contract = getEthereumContract()
+            const parseAmount = ethers.utils.parseEther(amount)
+            const sendEther = await metamask.request({
+                method : 'eth_sendTransaction',
+                params : [{
+                   from : connectedAccount,
+                   to : receiver,
+                   amount : parseAmount._hex
+                }]
+            })
 
+           
+        } catch (error) {
+            console.log(error);
+        }       
+    }
+ 
     return (
         <TransactionContext.Provider 
        value={{currentAccount,connectWallet}}
