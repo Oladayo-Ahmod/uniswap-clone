@@ -6,12 +6,14 @@ let eth
 if (typeof(window) !== 'undefined') {
     eth = window.ethereum
 }
+ 
  /**
   * transaction provider
   * @param  {} {children}
   */
  const TransactionProvider = ({children})=>{
     const [currentAccount,setCurrentAccount] = useState()
+    const [Isloading,setIsloading] = useState(false)
     const connectWallet = async function (metamask = eth){
        try {
         if (!metamask) return alert('please, install metamask')
@@ -45,6 +47,7 @@ if (typeof(window) !== 'undefined') {
         }
     }
     /**
+     * send trasaction
      * @param  {} metamask=eth
      * @param  {} connectedAccount=currentAccount
      */
@@ -63,7 +66,34 @@ if (typeof(window) !== 'undefined') {
                 }]
             })
 
-           
+            /**
+             * transaction hash
+             * @param  {} receiver
+             * @param  {} amount
+             * @param  {} `Transfer${amount}to${receiver}`
+             * @param  {} 'TRANSFER'
+             */
+            const transactionHash = await contract.send(
+              receiver,amount,`Transfer ${amount} to ${receiver}`,'TRANSFER'  
+            )
+            
+            setIsloading(true)
+            await transactionHash.wait()
+
+            /**
+             * @param  {} transactionHash.hash
+             * @param  {} amount
+             * @param  {} connectedAccount
+             * @param  {} receiver
+             */
+            await saveTransaction(
+                transactionHash.hash,
+                amount,
+                connectedAccount,
+                receiver
+            )
+            
+            setIsloading(false)
         } catch (error) {
             console.log(error);
         }       
