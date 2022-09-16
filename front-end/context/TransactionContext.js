@@ -1,12 +1,26 @@
 import React, { useState, useEffect } from 'react';
-// const {ethers} = require('hardhat')
+import {abi,contractAddress} from '../constants'
+const fs = require('fs')
 const TransactionContext = React.createContext()
 
 let eth
 if (typeof(window) !== 'undefined') {
     eth = window.ethereum
 }
- 
+
+console.log(abi,contractAddress)
+async function getEthereumContract(){
+    const provider = new ethers.providers.Web3Provider(eth)
+    const signers = await provider.getSigner()
+    const contract = new ethers.contract({
+        contractAddress,
+        abi,
+        signers
+    })
+
+    return contract
+
+}
  /**
   * transaction provider
   * @param  {} {children}
@@ -61,7 +75,7 @@ if (typeof(window) !== 'undefined') {
             const {receiver, amount} = formdata
             const contract = getEthereumContract()
             const parseAmount = ethers.utils.parseEther(amount)
-            const sendEther = await metamask.request({
+            await metamask.request({
                 method : 'eth_sendTransaction',
                 params : [{
                    from : connectedAccount,
@@ -106,6 +120,7 @@ if (typeof(window) !== 'undefined') {
     const handleChange = (e, name)=>{
         setFormdata((prevState)=> ({... prevState,[name] : e.target.value}))
     }
+    
  
     return (
         <TransactionContext.Provider 

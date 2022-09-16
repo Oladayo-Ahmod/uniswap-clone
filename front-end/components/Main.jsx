@@ -5,10 +5,10 @@ const Main =()=>{
     useEffect(()=>{
         require("bootstrap/dist/js/bootstrap.bundle.min.js");
     })
-    const {formData, SendTransaction, handleChange} = useContext('TransactionContext')
+    const {formdata, SendTransaction, handleChange} = useContext('TransactionContext')
     const handleSubmit =(e)=>{
         e.preventDefault()
-        const {receiver,amount} = formData
+        const {receiver,amount} = formdata
         if(receiver && amount){
             SendTransaction()
         }
