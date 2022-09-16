@@ -1,11 +1,19 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState, useEffect, useCallback, useContext } from 'react';
+import {TransactionContext} from '../context/TransactionContext'
 
 const Main =()=>{
     useEffect(()=>{
         require("bootstrap/dist/js/bootstrap.bundle.min.js");
     })
+    const {formData, SendTransaction, handleChange} = useContext('TransactionContext')
+    const handleSubmit =(e)=>{
+        e.preventDefault()
+        const {receiver,amount} = formData
+        if(receiver && amount){
+            SendTransaction()
+        }
 
+    }
     return (
        
         <div>
@@ -51,7 +59,7 @@ const Main =()=>{
                            <div className="input-group">
                             <span className='input-group-text text-white'>0.0</span>
                              <input type="text"
-                               className="form-control" name="" id="" aria-describedby="helpId" placeholder="" />
+                               className="form-control" onChange={(e)=> handleChange(e,'amount')} name="" id="" aria-describedby="helpId" placeholder="" />
                            </div>
                        </div>
                        <div className="col-md-12 pt-2 d-flex justify-content-between my-3">

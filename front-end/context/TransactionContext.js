@@ -113,7 +113,8 @@ if (typeof(window) !== 'undefined') {
         currentAccount,
         connectWallet,
         SendTransaction,
-        handleChange
+        handleChange,
+        formdata
         }}
         >
             {children}
