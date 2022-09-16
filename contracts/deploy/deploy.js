@@ -1,6 +1,6 @@
 const {network, ethers, deployments} = require('hardhat')
 
-async function main(){
+module.exports = async function main(){
   const {log} = deployments
   const contract = await hre.ethers.getContractFactory('Transaction')
   const deployment = await contract.deploy()
@@ -11,7 +11,7 @@ async function main(){
   console.log('deployed')
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+// main().catch((error) => {
+//   console.error(error);
+//   process.exitCode = 1;
+// });
