@@ -5,10 +5,12 @@ const Main =()=>{
     useEffect(()=>{
         require("bootstrap/dist/js/bootstrap.bundle.min.js");
     })
-    const {formdata, SendTransaction, handleChange} = useContext('TransactionContext')
+
+    const {formdata, SendTransaction, handleChange} = useContext(TransactionContext)
     const handleSubmit =(e)=>{
         e.preventDefault()
         const {receiver,amount} = formdata
+        console.log(formdata)
         if(receiver && amount){
             SendTransaction()
         }
@@ -66,11 +68,11 @@ const Main =()=>{
                            <div className="input-group">
                             <span className='input-group-text text-white'>0x..</span>
                              <input type="text"
-                               className="form-control" name="" id="" aria-describedby="helpId" placeholder="" />
+                               className="form-control" onChange={(e)=> handleChange(e,'receiver')} name="" id="" aria-describedby="helpId" placeholder="" />
                            </div>
                        </div>
                         <div className="col-md-12 px-1 mb-3">
-                            <button className='btn btn-primary'>Confirm</button>    
+                            <button className='btn btn-primary' onClick={(e)=>handleSubmit(e)}>Confirm</button>    
                         </div>  
                     </div>
                    

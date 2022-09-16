@@ -1,5 +1,4 @@
 const {ethers} = require('hardhat')
-const fs = require('fs')
 
 module.exports = function(){
     if (process.env.UPDATE_FRON_END) {

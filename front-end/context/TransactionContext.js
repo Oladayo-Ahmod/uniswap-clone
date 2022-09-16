@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {abi,contractAddress} from '../constants'
-const fs = require('fs')
 const TransactionContext = React.createContext()
 
 let eth
@@ -8,7 +7,7 @@ if (typeof(window) !== 'undefined') {
     eth = window.ethereum
 }
 
-console.log(abi,contractAddress)
+// console.log(abi,contractAddress)
 async function getEthereumContract(){
     const provider = new ethers.providers.Web3Provider(eth)
     const signers = await provider.getSigner()
@@ -25,6 +24,7 @@ async function getEthereumContract(){
   * transaction provider
   * @param  {} {children}
   */
+
  const TransactionProvider = ({children})=>{
     const [currentAccount,setCurrentAccount] = useState()
     const [isLoading,setIsLoading] = useState(false)
@@ -140,6 +140,7 @@ async function getEthereumContract(){
 
 module.exports = {
     TransactionProvider,
-    TransactionContext
+    TransactionContext,
+    // formdata
 
 }
