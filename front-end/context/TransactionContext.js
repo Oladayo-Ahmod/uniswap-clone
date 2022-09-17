@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import {ethers} from 'ethers'
-import {abi,contractAddress} from '../constants'
+import {abi} from '../constants'
+import Swal from 'sweetalert2'
 
+
+// useEffect(()=>{
+//     const Swal = require()
+// },[])
 
 const TransactionContext = React.createContext()
+const contractAddress = '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'
 
 let eth
 if (typeof(window) !== 'undefined') {
@@ -13,7 +19,7 @@ if (typeof(window) !== 'undefined') {
 // console.log(abi,contractAddress)
 async function getEthereumContract(){
     const provider = new ethers.providers.Web3Provider(eth)
-    const signers = await provider.getSigner()
+    const signers =  provider.getSigner()
     const contract = new ethers.Contract(
         contractAddress,
         abi,
@@ -77,8 +83,8 @@ async function getEthereumContract(){
             if(!metamask) return alert('Please, install metamask')
             const {receiver, amount} = formdata
             const contract = getEthereumContract()
+            console.log(contract)
             const parseAmount = ethers.utils.parseEther(amount)
-            console.log(parseAmount,amount)
             await metamask.request({
                 method : 'eth_sendTransaction',
                 params : [{
@@ -87,7 +93,6 @@ async function getEthereumContract(){
                    value : parseAmount._hex
                 }]
             })
-            console.log(parseAmount,'somethings')
 
             /**
              * transaction hash
@@ -96,12 +101,25 @@ async function getEthereumContract(){
              * @param  {} `Transfer${amount}to${receiver}`
              * @param  {} 'TRANSFER'
              */
+             Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                text: `You have successfully transferred ${amount} ETH to ${receiver}`,
+                showConfirmButton: false,
+                timer: 2500
+              })
             const transactionHash = await contract.send(
-              receiver,amount,`Transfer ${amount} to ${receiver}`,'TRANSFER'  
+              receiver,parseAmount,`Transfer ${amount} to ${receiver}`,'TRANSFER'  
             )
-            
             setIsLoading(true)
             await transactionHash.wait()
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                text: `You have successfully transferred ${amount} ETH to ${receiver}`,
+                showConfirmButton: false,
+                timer: 2500
+              })
 
             /**
              * @param  {} transactionHash.hash
