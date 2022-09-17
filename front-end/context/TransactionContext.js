@@ -78,14 +78,16 @@ async function getEthereumContract(){
             const {receiver, amount} = formdata
             const contract = getEthereumContract()
             const parseAmount = ethers.utils.parseEther(amount)
+            console.log(parseAmount,amount)
             await metamask.request({
                 method : 'eth_sendTransaction',
                 params : [{
                    from : connectedAccount,
                    to : receiver,
-                   amount : parseAmount._hex
+                   value : parseAmount._hex
                 }]
             })
+            console.log(parseAmount,'somethings')
 
             /**
              * transaction hash
@@ -118,10 +120,11 @@ async function getEthereumContract(){
 
         } catch (error) {
             console.log(error);
-        }       
+        }
     }
     const handleChange = (e, name)=>{
-        setFormdata((prevState)=> ({... prevState,[name] : e.target.value}))
+        setFormdata((prevState)=> ({ ... prevState,[name] : e.target.value}))
+        // console.log(formdata)
     }
     
  

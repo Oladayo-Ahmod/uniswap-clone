@@ -8,9 +8,9 @@ const Main =()=>{
 
     const {formdata, SendTransaction, handleChange} = useContext(TransactionContext)
     const handleSubmit =(e)=>{
-        e.preventDefault()
         const {receiver,amount} = formdata
-        console.log(formdata)
+        e.preventDefault()
+        // console.log(formdata)
         if(receiver && amount){
             SendTransaction()
         }
