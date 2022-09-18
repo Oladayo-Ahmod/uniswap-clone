@@ -132,18 +132,6 @@ async function getEthereumContract(){
                 timer: 2500
               })
 
-            /**
-             * @param  {} transactionHash.hash
-             * @param  {} amount
-             * @param  {} connectedAccount
-             * @param  {} receiver
-             */
-            // await saveTransaction(
-            //     transactionHash.hash,
-            //     amount,
-            //     connectedAccount,
-            //     receiver
-            // )
             
             // setIsLoading(false)
 
@@ -151,7 +139,7 @@ async function getEthereumContract(){
             console.log(error);
         }
     }
-    
+
     /**
      * @param  {} e
      * @param  {} name
@@ -164,6 +152,26 @@ async function getEthereumContract(){
         // console.log(formdata)
     }
     
+ 
+    /**
+     * @param  {} txHash
+     * @param  {} amount
+     * @param  {} fromAddress=currentAccount
+     * @param  {} toAddress
+     */
+    const saveTransaction = async function(txHash,amount,fromAddress = currentAccount,toAddress){
+        const txDoc = {
+            _type : 'transactions',
+            _id : txHash,
+            fromAddress : fromAddress,
+            toAddress : toAddress,
+            timestamp : new Date(Date.now()).toISOString(),
+            txHash : txHash,
+            amount : parseFloat(amount)
+        }
+
+        await client.createIfNotExist(txDoc)
+    }
  
     return (
         <TransactionContext.Provider 
