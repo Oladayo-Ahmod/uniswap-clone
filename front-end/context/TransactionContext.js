@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {ethers} from 'ethers'
-import {abi} from '../constants'
+import {abi} from '../lib/constants'
 import Swal from 'sweetalert2'
 
 
