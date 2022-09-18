@@ -94,6 +94,23 @@ async function getEthereumContract(){
                 }]
             })
 
+
+            /**
+             * @param  {'top-end'} {position
+             * @param  {'success'} icon
+             * @param  {`Youhavesuccessfullytransferred${amount}ETHto${receiver}`} text
+             * @param  {false} showConfirmButton
+             * @param  {2500}} timer
+             */
+            
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                text: `You have successfully transferred ${amount} ETH to ${receiver}`,
+                showConfirmButton: false,
+                timer: 2500
+            })
+
             /**
              * transaction hash
              * @param  {} receiver
@@ -101,13 +118,7 @@ async function getEthereumContract(){
              * @param  {} `Transfer${amount}to${receiver}`
              * @param  {} 'TRANSFER'
              */
-             Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                text: `You have successfully transferred ${amount} ETH to ${receiver}`,
-                showConfirmButton: false,
-                timer: 2500
-              })
+    
             const transactionHash = await contract.send(
               receiver,parseAmount,`Transfer ${amount} to ${receiver}`,'TRANSFER'  
             )
@@ -140,6 +151,14 @@ async function getEthereumContract(){
             console.log(error);
         }
     }
+    
+    /**
+     * @param  {} e
+     * @param  {} name
+     * @param  {} =>{setFormdata((prevState
+     * @param  {} =>({...prevState
+     * @param  {e.target.value}} [name]
+     */
     const handleChange = (e, name)=>{
         setFormdata((prevState)=> ({ ... prevState,[name] : e.target.value}))
         // console.log(formdata)
