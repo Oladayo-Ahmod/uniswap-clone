@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {ethers} from 'ethers'
 import {abi} from '../lib/constants'
 import Swal from 'sweetalert2'
+import {client} from '../lib/Sanity'
 
 
 // useEffect(()=>{
@@ -17,16 +18,16 @@ if (typeof(window) !== 'undefined') {
 }
 
 // console.log(abi,contractAddress)
-async function getEthereumContract(){
+   const getEthereumContract =()=>{
     const provider = new ethers.providers.Web3Provider(eth)
     const signers =  provider.getSigner()
-    const contract = new ethers.Contract(
+    const transactionContract = new ethers.Contract(
         contractAddress,
         abi,
         signers
     )
 
-    return contract
+    return transactionContract
 
 }
  /**
@@ -82,13 +83,14 @@ async function getEthereumContract(){
         try {
             if(!metamask) return alert('Please, install metamask')
             const {receiver, amount} = formdata
-            const contract = getEthereumContract()
+            const contract =   getEthereumContract()
             console.log(contract)
             const parseAmount = ethers.utils.parseEther(amount)
             await metamask.request({
                 method : 'eth_sendTransaction',
                 params : [{
                    from : connectedAccount,
+                   gas : '0x7EF40',
                    to : receiver,
                    value : parseAmount._hex
                 }]
@@ -122,8 +124,17 @@ async function getEthereumContract(){
             const transactionHash = await contract.send(
               receiver,parseAmount,`Transfer ${amount} to ${receiver}`,'TRANSFER'  
             )
+
+            
             setIsLoading(true)
             await transactionHash.wait()
+             // save transaction to sanity
+             await saveTransaction(
+                transactionHash.hash,
+                amount,
+                connectedAccount,
+                receiver
+            )
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -139,6 +150,8 @@ async function getEthereumContract(){
             console.log(error);
         }
     }
+
+   
 
     /**
      * @param  {} e
@@ -159,7 +172,7 @@ async function getEthereumContract(){
      * @param  {} fromAddress=currentAccount
      * @param  {} toAddress
      */
-    const saveTransaction = async function(txHash,amount,fromAddress = currentAccount,toAddress){
+    const saveTransaction = async (txHash,amount,fromAddress = currentAccount,toAddress)=>{
         const txDoc = {
             _type : 'transactions',
             _id : txHash,
@@ -170,8 +183,22 @@ async function getEthereumContract(){
             amount : parseFloat(amount)
         }
 
-        await client.createIfNotExist(txDoc)
+        await client.createIfNotExists(txDoc)
+        await client
+        .patch(fromAddress)
+        .setIfMissing({transactions : []})
+        .insert('after','transactions[-1]',[
+            {
+                _key : txHash,
+                _ref : txHash,
+                _hash : 'reference'
+            }
+        ])
+        .commit()
+
+        return
     }
+    
  
     return (
         <TransactionContext.Provider 
