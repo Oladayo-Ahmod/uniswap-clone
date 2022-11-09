@@ -15,7 +15,7 @@ const CONTRACTADDRESS = '../front-end/lib/constants/contractAddress.json'
 async function contractAddress(){
     const transaction = await hre.ethers.getContractFactory("Transaction")
     const deploy = await transaction.deploy()
-    console.log(deploy.address);
+    // console.log(deploy.address);
     const contractAddresses = JSON.parse(fs.readFileSync(CONTRACTADDRESS, "utf8"))
     if (network.config.chainId.toString() in contractAddresses) {
         if (!contractAddresses[network.config.chainId.toString()].includes(deploy.address)) {
@@ -24,7 +24,7 @@ async function contractAddress(){
     } else {
         contractAddresses[network.config.chainId.toString()] = [deploy.address]
     }
-    fs.writeFileSync(CONTRACTADDRESS, JSON.stringify(contractAddresses))
+    fs.writeFileSync(CONTRACTADDRESS, JSON.stringify(deploy.address))
 
 }
 

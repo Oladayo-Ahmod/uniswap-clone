@@ -4,12 +4,12 @@ export const TransactionSchema = {
     type : 'document',
     fields : [
        {
-        name : 'txHash',
+        name : 'TxHash',
         title : 'Transaction Hash',
         type : 'string'
        },
        {
-        name : 'fromAddress',
+        name : 'FromAddress',
         title : 'From (Wallet Address)',
         type : 'string',
        },
@@ -17,6 +17,17 @@ export const TransactionSchema = {
         name : 'ToAddress',
         title : 'To (Wallet Address)',
         type : 'string'
-       }
+       },
+       {
+        name : 'Amount',
+        title : 'Total Amount sent',
+        type : 'number'
+       },
+       {
+        name : 'Timestamp',
+        title : 'Time transaction confirmed',
+        type : 'number'
+       },
+
     ]
 }

@@ -1,3 +1,5 @@
 node_modules/
 .env
 front-end/constants
+front-end/images/github_files
+front-end/images/github.html

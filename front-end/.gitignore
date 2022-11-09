@@ -37,3 +37,5 @@ next-env.d.ts
 
 # contracts constants
 constants/
+public/images/github_files
+public/images/github.html

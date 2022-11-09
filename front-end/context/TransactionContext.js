@@ -16,7 +16,9 @@ let eth
 if (typeof(window) !== 'undefined') {
     eth = window.ethereum
 }
-
+else{
+    console.log('please install metamask')
+}
 // console.log(abi,contractAddress)
    const getEthereumContract =()=>{
     const provider = new ethers.providers.Web3Provider(eth)
@@ -47,7 +49,7 @@ if (typeof(window) !== 'undefined') {
         if (!metamask) return alert('please, install metamask')
             const accounts = await metamask.request({method : 'eth_requestAccounts'})
             setCurrentAccount(accounts[0])
-            console.log(accounts)
+            // console.log(accounts)
        } catch (error) {
             console.log(error)
        }
@@ -83,10 +85,11 @@ if (typeof(window) !== 'undefined') {
         try {
             if(!metamask) return alert('Please, install metamask')
             const {receiver, amount} = formdata
-            const contract =   getEthereumContract()
-            console.log(contract)
+
+            const contract =  getEthereumContract()
+            // console.log(contract)
             const parseAmount = ethers.utils.parseEther(amount)
-            await metamask.request({
+            ethereum.request({
                 method : 'eth_sendTransaction',
                 params : [{
                    from : connectedAccount,
@@ -96,6 +99,21 @@ if (typeof(window) !== 'undefined') {
                 }]
             })
 
+             /**
+             * transaction hash
+             * @param  {} receiver
+             * @param  {} amount
+             * @param  {} `Transfer${amount}to${receiver}`
+             * @param  {} 'TRANSFER'
+             */
+    
+              const transactionHash = await contract.send(
+                receiver,parseAmount,`Transfer ${amount} to ${receiver}`,'TRANSFER'  
+              )
+  
+              
+              setIsLoading(true)
+              await transactionHash.wait()
 
             /**
              * @param  {'top-end'} {position
@@ -113,21 +131,7 @@ if (typeof(window) !== 'undefined') {
                 timer: 2500
             })
 
-            /**
-             * transaction hash
-             * @param  {} receiver
-             * @param  {} amount
-             * @param  {} `Transfer${amount}to${receiver}`
-             * @param  {} 'TRANSFER'
-             */
-    
-            const transactionHash = await contract.send(
-              receiver,parseAmount,`Transfer ${amount} to ${receiver}`,'TRANSFER'  
-            )
-
-            
-            setIsLoading(true)
-            await transactionHash.wait()
+           
              // save transaction to sanity
              await saveTransaction(
                 transactionHash.hash,
@@ -176,10 +180,10 @@ if (typeof(window) !== 'undefined') {
         const txDoc = {
             _type : 'transactions',
             _id : txHash,
-            fromAddress : fromAddress,
-            toAddress : toAddress,
-            timestamp : new Date(Date.now()).toISOString(),
-            txHash : txHash,
+            FromAddress : fromAddress,
+            ToAddress : toAddress,
+            Timestamp : new Date(Date.now()).toISOString(),
+            TxHash : txHash,
             amount : parseFloat(amount)
         }
 
