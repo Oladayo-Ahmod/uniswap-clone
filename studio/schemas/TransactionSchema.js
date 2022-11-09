@@ -26,7 +26,7 @@ export const TransactionSchema = {
        {
         name : 'Timestamp',
         title : 'Time transaction confirmed',
-        type : 'number'
+        type : 'datetime'
        },
 
     ]
