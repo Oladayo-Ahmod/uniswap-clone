@@ -184,7 +184,7 @@ else{
             ToAddress : toAddress,
             Timestamp : new Date(Date.now()).toISOString(),
             TxHash : txHash,
-            amount : parseFloat(amount)
+            Amount : parseFloat(amount)
         }
 
         await client.createIfNotExists(txDoc)
