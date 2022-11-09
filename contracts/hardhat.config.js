@@ -6,8 +6,8 @@ require("solidity-coverage")
 require("hardhat-contract-sizer")
 require("dotenv").config()
 
-const RINKEBY_RPC_URL = process.env.RINKEBY_RPC_URL || 'https://someething'
-const PRIVATE_KEY = process.env.PRIVATE_KEY || '26479d2816d2979b0e14c3e05744df448e4d10946737d60f82181d2526efa8b8'
+const GOERLI_RPC_URL = process.env.GOERLI_RPC_URL || 'https://someething'
+const PRIVATE_KEY = process.env.PRIVATE_KEY || '43e2cd519c4f2c4727688fc6068e4a8cdb0216ed335665401858aee7d2418483'
 const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY
 const REPORT_GAS = process.env.REPORT_GAS || false
@@ -19,10 +19,8 @@ module.exports = {
             chainId : 31337,
             blockConfirmations : 1
         },
-        rinkeby : {
-            chainId : 4,
-            blockConfirmations : 6,
-            url : RINKEBY_RPC_URL,
+        goerli : {
+            url : GOERLI_RPC_URL,
             accounts : [PRIVATE_KEY]
 
         }
